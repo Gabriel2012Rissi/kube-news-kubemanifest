@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubenews
+spec:
+  selector:
+    matchLabels:
+      app: kubenews
+  template:
+    metadata:
+      labels:
+        app: kubenews
+    spec:
+      containers:
+        - name: kubenews
+          image: gabriel2012rissi/kube-news:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_USERNAME
+              value: "kubedevnews"
+            - name: DB_PASSWORD
+              value: "kubedevnews123"
+            - name: DB_DATABASE
+              value: "kubedevnews"
+            - name: DB_HOST
+              value: "postgre"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubenews
+  labels:
+    app: kubenews
+spec:
+  selector:
+    app: kubenews
+  ports:
+    - port: 30080
+      targetPort: 3000
+  type: ClusterIP
