@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: kubenews
-          image: gabriel2012rissi/kube-news:latest
+          image: gabriel2012rissi/kube-news:develop
           ports:
             - containerPort: 3000
           env:
